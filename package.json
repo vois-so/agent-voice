@@ -1,0 +1,15 @@
+{
+  "name": "@vois-so/agent-voice",
+  "version": "0.1.0",
+  "description": "Your AI agent speaks at the end of a task, in a Vois Studio voice on your computer.",
+  "type": "module",
+  "bin": { "agent-voice": "scripts/agent-voice.mjs" },
+  "files": ["scripts/", "hooks/", "commands/", ".claude-plugin/", "integrations/", "README.md", "LICENSE"],
+  "engines": { "node": ">=18" },
+  "scripts": { "test": "node --test test/agent-voice.test.mjs" },
+  "repository": { "type": "git", "url": "git+https://github.com/vois-so/agent-voice.git" },
+  "homepage": "https://github.com/vois-so/agent-voice",
+  "license": "MIT",
+  "keywords": ["claude-code", "codex", "cursor", "gemini-cli", "hooks", "text-to-speech", "voice", "vois-studio"],
+  "private": true
+}
