@@ -1,0 +1,13 @@
+{
+  "name": "agent-voice",
+  "owner": { "name": "Vois Studio", "url": "https://vois.so" },
+  "metadata": { "description": "agent-voice from Vois Studio: your AI agent speaks at the end of a task." },
+  "plugins": [
+    {
+      "name": "agent-voice",
+      "source": "./",
+      "description": "Claude speaks a short summary at the end of a task and tells you when it waits for your answer, in a Vois Studio voice.",
+      "version": "0.1.0"
+    }
+  ]
+}
