@@ -1,0 +1,11 @@
+{
+  "name": "agent-voice",
+  "displayName": "agent-voice",
+  "version": "0.1.0",
+  "description": "Claude speaks a short summary at the end of a task and tells you when it waits for your answer, in a Vois Studio voice on your computer. Operates on the Free plan of Vois Studio.",
+  "author": { "name": "Vois Studio", "url": "https://vois.so" },
+  "homepage": "https://github.com/vois-so/agent-voice",
+  "repository": "https://github.com/vois-so/agent-voice",
+  "license": "MIT",
+  "keywords": ["voice", "text-to-speech", "tts", "notifications", "hooks", "accessibility", "vois-studio"]
+}
