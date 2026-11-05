@@ -1,0 +1,11 @@
+{
+  "version": 1,
+  "hooks": {
+    "afterAgentResponse": [
+      {
+        "command": "node \"$HOME/.agent-voice/scripts/agent-voice.mjs\" hook cursor response",
+        "timeout": 10
+      }
+    ]
+  }
+}
