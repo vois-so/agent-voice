@@ -1,0 +1,26 @@
+{
+  "hooks": {
+    "Stop": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "node \"$HOME/.agent-voice/scripts/agent-voice.mjs\" hook codex stop",
+            "timeout": 10
+          }
+        ]
+      }
+    ],
+    "PermissionRequest": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "node \"$HOME/.agent-voice/scripts/agent-voice.mjs\" hook codex permission",
+            "timeout": 10
+          }
+        ]
+      }
+    ]
+  }
+}
