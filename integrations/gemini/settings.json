@@ -1,0 +1,26 @@
+{
+  "hooks": {
+    "AfterAgent": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "node \"$HOME/.agent-voice/scripts/agent-voice.mjs\" hook gemini after-agent",
+            "timeout": 10000
+          }
+        ]
+      }
+    ],
+    "Notification": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "node \"$HOME/.agent-voice/scripts/agent-voice.mjs\" hook gemini notify",
+            "timeout": 10000
+          }
+        ]
+      }
+    ]
+  }
+}
