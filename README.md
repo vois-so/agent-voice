@@ -90,7 +90,7 @@ Type `/agent-voice:voice status` in Claude Code, or use `node scripts/agent-voic
 2. The hook reads the reply, and keeps the first sentences.
 3. A background process gives the text to `vois speak --follow --play`. Vois Studio speaks it with a Sonic voice.
 
-The text goes only to Vois Studio on your computer. agent-voice does not send data to a server. It writes only two files: its settings and the result of the last audio.
+The text goes only to Vois Studio on your computer. agent-voice does not send data to a server. It writes only two files: its settings and the result of the last audio. See [PRIVACY.md](PRIVACY.md).
 
 ## Problems and ideas
 
