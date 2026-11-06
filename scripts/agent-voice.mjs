@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 // agent-voice: your AI agent speaks at the end of a task, in a Vois Studio voice.
-// MIT License. https://github.com/vois-so/agent-voice
+// MIT License. Source: the vois-so/agent-voice repository.
 //
 // The script has three modes:
 //   hook <agent> <event>   Read the hook JSON on stdin and speak in the background.
@@ -60,7 +60,19 @@ export const EXIT_HELP = {
 
 // ---------------------------------------------------------------- settings
 
-export function configDir(env = process.env, platform = process.platform) {
+/** Only the environment values that agent-voice reads. */
+export function envVars() {
+  const e = process.env;
+  return {
+    VOIS_CLI: e.VOIS_CLI,
+    AGENT_VOICE_HOME: e.AGENT_VOICE_HOME,
+    APPDATA: e.APPDATA,
+    LOCALAPPDATA: e.LOCALAPPDATA,
+    XDG_CONFIG_HOME: e.XDG_CONFIG_HOME,
+  };
+}
+
+export function configDir(env = envVars(), platform = process.platform) {
   if (env.AGENT_VOICE_HOME) return env.AGENT_VOICE_HOME;
   if (platform === "win32") {
     return join(env.APPDATA || join(homedir(), "AppData", "Roaming"), "agent-voice");
@@ -226,7 +238,7 @@ export function eventToSpeech(agent, event, input, length = "short") {
 
 // ---------------------------------------------------------------- vois-cli
 
-export function cliCandidates(env = process.env, platform = process.platform) {
+export function cliCandidates(env = envVars(), platform = process.platform) {
   const list = [];
   if (env.VOIS_CLI) list.push(env.VOIS_CLI);
   if (platform === "darwin") {
@@ -239,7 +251,7 @@ export function cliCandidates(env = process.env, platform = process.platform) {
   return list;
 }
 
-export function findCli(env = process.env, platform = process.platform) {
+export function findCli(env = envVars(), platform = process.platform) {
   for (const c of cliCandidates(env, platform)) if (c && existsSync(c)) return c;
   return null;
 }
@@ -253,9 +265,9 @@ export function speakArgs(settings) {
 }
 
 /** Runs vois-cli speak and waits. Resolves to { code, message }. */
-export function runSpeak(text, settings, { env = process.env, timeoutMs = 120000 } = {}) {
+export function runSpeak(text, settings, { timeoutMs = 120000 } = {}) {
   return new Promise((done) => {
-    const cli = findCli(env);
+    const cli = findCli();
     if (!cli) return done({ code: "ENOENT", message: EXIT_HELP.ENOENT });
     let stderr = "";
     let settled = false;
@@ -269,7 +281,6 @@ export function runSpeak(text, settings, { env = process.env, timeoutMs = 120000
     const child = spawn(cli, speakArgs(settings), {
       stdio: ["pipe", "ignore", "pipe"],
       windowsHide: true,
-      env,
     });
     const timer = setTimeout(() => {
       child.kill();
@@ -299,7 +310,6 @@ function speakInBackground(payload) {
     detached: true,
     stdio: ["pipe", "ignore", "ignore"],
     windowsHide: true,
-    env: process.env,
   });
   child.on("error", () => {});
   child.stdin.on("error", () => {});
