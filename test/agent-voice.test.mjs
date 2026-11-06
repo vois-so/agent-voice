@@ -4,6 +4,9 @@ import { chmodSync, existsSync, mkdtempSync, readFileSync, writeFileSync } from 
 import { tmpdir } from "node:os";
 import { join } from "node:path";
 import { test } from "node:test";
+
+// A small environment for child processes: only the values that they need.
+const baseEnv = { PATH: process.env.PATH, HOME: process.env.HOME, TMPDIR: process.env.TMPDIR };
 import { fileURLToPath } from "node:url";
 
 import {
@@ -29,7 +32,7 @@ test("toSpeech removes code, links, tables and paths", () => {
     "```",
     "| a | b |",
     "|---|---|",
-    "- See [the docs](https://example.com/docs) for details",
+    "- See [the docs](https://docs.invalid/guide) for details",
     "Run `npm test` to check.",
   ].join("\n");
   const out = toSpeech(md);
@@ -137,7 +140,7 @@ process.stdin.on("end", () => {
 `,
   );
   chmodSync(fake, 0o755);
-  const env = { ...process.env, VOIS_CLI: fake, AGENT_VOICE_HOME: dir };
+  const env = { ...baseEnv, VOIS_CLI: fake, AGENT_VOICE_HOME: dir };
   const input = JSON.stringify({
     hook_event_name: "Stop",
     cwd: "/tmp/demo",
@@ -161,7 +164,7 @@ process.stdin.on("end", () => {
 test("hook mode stays silent when agent-voice is off", { skip: process.platform === "win32" }, async () => {
   const dir = mkdtempSync(join(tmpdir(), "agent-voice-off-"));
   writeFileSync(join(dir, "config.json"), JSON.stringify({ default: { enabled: false }, projects: {} }));
-  const env = { ...process.env, VOIS_CLI: "/nonexistent/vois-cli", AGENT_VOICE_HOME: dir };
+  const env = { ...baseEnv, VOIS_CLI: "/nonexistent/vois-cli", AGENT_VOICE_HOME: dir };
   const input = JSON.stringify({ cwd: "/tmp/demo", last_assistant_message: "Hello." });
   const res = spawnSync(process.execPath, [SCRIPT, "hook", "claude", "stop"], { input, env, encoding: "utf8" });
   assert.equal(res.status, 0);
@@ -170,7 +173,7 @@ test("hook mode stays silent when agent-voice is off", { skip: process.platform 
 });
 
 test("a hook with bad input exits 0 and prints nothing", () => {
-  const res = spawnSync(process.execPath, [SCRIPT, "hook", "claude", "stop"], { input: "not json", encoding: "utf8" });
+  const res = spawnSync(process.execPath, [SCRIPT, "hook", "claude", "stop"], { input: "not json", env: baseEnv, encoding: "utf8" });
   assert.equal(res.status, 0);
   assert.equal(res.stdout, "");
 });
