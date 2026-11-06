@@ -5,7 +5,13 @@
         "hooks": [
           {
             "type": "command",
-            "command": "node \"${CLAUDE_PLUGIN_ROOT}/scripts/agent-voice.mjs\" hook claude stop",
+            "command": "node",
+            "args": [
+              "${CLAUDE_PLUGIN_ROOT}/scripts/agent-voice.mjs",
+              "hook",
+              "claude",
+              "stop"
+            ],
             "timeout": 10
           }
         ]
@@ -16,7 +22,13 @@
         "hooks": [
           {
             "type": "command",
-            "command": "node \"${CLAUDE_PLUGIN_ROOT}/scripts/agent-voice.mjs\" hook claude notify",
+            "command": "node",
+            "args": [
+              "${CLAUDE_PLUGIN_ROOT}/scripts/agent-voice.mjs",
+              "hook",
+              "claude",
+              "notify"
+            ],
             "timeout": 10
           }
         ]
