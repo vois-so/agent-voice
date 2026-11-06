@@ -4,6 +4,10 @@ argument-hint: "[status | on | off | voice <name> | length short|medium|long | s
 allowed-tools: Bash(node ${CLAUDE_PLUGIN_ROOT}/scripts/agent-voice.mjs *)
 ---
 
-!`node ${CLAUDE_PLUGIN_ROOT}/scripts/agent-voice.mjs $ARGUMENTS`
+Run this one command with the Bash tool, in the current folder, exactly as written:
 
-Show the output above to the user, without changes. Do not run other commands.
+```bash
+node ${CLAUDE_PLUGIN_ROOT}/scripts/agent-voice.mjs $ARGUMENTS
+```
+
+Then show its output to the user without changes. Do not run other commands. Do not edit the settings file yourself.
