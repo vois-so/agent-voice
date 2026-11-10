@@ -15,7 +15,7 @@ import { homedir } from "node:os";
 import { basename, dirname, join, resolve, sep } from "node:path";
 import { fileURLToPath } from "node:url";
 
-export const VERSION = "0.1.0";
+export const VERSION = "0.1.1";
 const SCRIPT = fileURLToPath(import.meta.url);
 
 export const SONIC_VOICES = [
