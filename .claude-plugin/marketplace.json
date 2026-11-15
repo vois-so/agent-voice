@@ -7,7 +7,7 @@
       "name": "agent-voice",
       "source": "./",
       "description": "Claude speaks a short summary at the end of a task and tells you when it waits for your answer, in a Vois Studio voice.",
-      "version": "0.1.0"
+      "version": "0.1.1"
     }
   ]
 }

@@ -1,6 +1,6 @@
 {
   "name": "@vois-so/agent-voice",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Your AI agent speaks at the end of a task, in a Vois Studio voice on your computer.",
   "type": "module",
   "bin": { "agent-voice": "scripts/agent-voice.mjs" },
